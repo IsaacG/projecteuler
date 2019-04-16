@@ -1,5 +1,6 @@
 module Main (main) where
 import Prelude
+import Text.Printf
 
 -- Q1: sum multiples of 3 and 5
 
@@ -60,7 +61,7 @@ makePalin fixed changes min
   | changes <= min = 0
   | otherwise = makePalin fixed ( changes - 1 ) min
 
-ans4a = listMax $ map (\x -> makePalin x x 900) [999,998..900]
+ans4 = listMax $ map (\x -> makePalin x x 900) [999,998..900]
 
 allPalin :: Int -> Int -> [Int]
 allPalin max min
@@ -69,5 +70,13 @@ allPalin max min
 
 ans4b = listMax $ allPalin 999 900
 
+-- Answer printing
 
-main = print ( [ans1, ans2, ans3, ans4a] )
+showAns :: Int -> Int -> IO ()
+showAns x y = printf "Q%d: %d\n" x y
+
+main = do
+  showAns 1 ans1
+  showAns 2 ans2
+  showAns 3 ans3
+  showAns 4 ans4

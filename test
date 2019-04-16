@@ -1,0 +1,24 @@
+#!/bin/bash
+
+h="$( ghc haskell >/dev/null 2>&1 && ./haskell )"
+p="$( ./python.py )"
+
+if ! diff <( printf '%s\n' "$h" ) <( printf '%s\n' "$p" ); then
+  echo "Haskell vs Python"
+fi
+
+g="$(go run go.go)"
+if ! diff <( printf '%s\n' "$h" ) <( printf '%s\n' "$g" ); then
+  echo "Haskell vs Go"
+fi
+
+echo "All same"
+
+echo Haskell
+time ./haskell >/dev/null
+echo ---
+echo Python
+time ./python.py >/dev/null
+echo ---
+echo Go
+time go run go.go >/dev/null
