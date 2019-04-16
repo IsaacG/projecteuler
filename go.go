@@ -52,15 +52,14 @@ func Q3() int {
 // Q4: A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
 // Find the largest palindrome made from the product of two 3-digit numbers.
 
-func Reverse(s string) string {
-	r := []rune(s)
-	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
-		r[i], r[j] = r[j], r[i]
-	}
-	return string(r)
-}
-
 func Q4() int {
+	Reverse := func (s string) string {
+		r := []rune(s)
+		for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
+			r[i], r[j] = r[j], r[i]
+		}
+		return string(r)
+	}
 
 	IsPalindrome := func(x int) bool {
 		s := fmt.Sprintf("%d", x)
@@ -90,8 +89,27 @@ func Q4() int {
 	return MaxP(999,900)
 }
 
+// 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+// What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+func Q5() int {
+  IsDivByAll := func(n, d int) bool {
+    for i := d; i > 1; i-- {
+      if (n % i) != 0 {
+        return false
+			}
+		}
+    return true
+	}
+
+	var t int
+  for t = 2520; ! IsDivByAll(t, 20); t += 2520 {
+	}
+  return t
+}
+
 func main() {
-	ans := []func () int{Q1, Q2, Q3, Q4}
+	ans := []func () int{Q1, Q2, Q3, Q4, Q5}
 	for i, a := range ans {
 		fmt.Printf("Q%d: %d\n", i+1, a())
 	}

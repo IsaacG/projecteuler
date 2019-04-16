@@ -70,6 +70,17 @@ allPalin max min
 
 ans4b = listMax $ allPalin 999 900
 
+-- 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+-- What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+q5isDiv :: Int -> Int -> Bool
+q5isDiv x y
+  | y == 1 = True
+  | otherwise = (isDiv x y) && ( q5isDiv x (y-1) )
+
+isDiv20 = filter (\x -> q5isDiv x 20) [2520,5040..]
+ans5 = head $ take 1 isDiv20
+
 -- Answer printing
 
 showAns :: Int -> Int -> IO ()
@@ -80,3 +91,4 @@ main = do
   showAns 2 ans2
   showAns 3 ans3
   showAns 4 ans4
+  showAns 5 ans5

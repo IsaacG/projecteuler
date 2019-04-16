@@ -2,17 +2,22 @@
 
 h="$( ghc haskell >/dev/null 2>&1 && ./haskell )"
 p="$( ./python.py )"
+same=1
 
 if ! diff <( printf '%s\n' "$h" ) <( printf '%s\n' "$p" ); then
-  echo "Haskell vs Python"
+  printf 'Haskell vs Python\n'
+  same=0
 fi
 
 g="$(go run go.go)"
 if ! diff <( printf '%s\n' "$h" ) <( printf '%s\n' "$g" ); then
-  echo "Haskell vs Go"
+  printf 'Haskell vs Go\n'
+  same=0
 fi
 
-echo "All same"
+! (( same )) && exit 1
+
+printf 'All same\n'
 
 echo Haskell
 time ./haskell >/dev/null

@@ -61,6 +61,23 @@ def Q4():
 
   return MaxP(999,900)
 
+# 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+# What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+def Q5():
+
+  def IsDivByAll(n, d):
+    i = d
+    while i > 1:
+      if n % i:
+        return False
+      i -= 1
+    return True
+
+  t = 2520
+  while not IsDivByAll(t, 20):
+    t += 2520
+  return t
 
 if __name__ == '__main__':
   me = sys.modules[__name__]
@@ -69,3 +86,5 @@ if __name__ == '__main__':
       continue
     print('%s: %d' % (n, f()))
 
+
+# vim:ts=2:sw=2:expandtab
